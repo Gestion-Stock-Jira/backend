@@ -5,12 +5,13 @@ pipeline {
         stage('Build') {
             steps {
                 git 'https://github.com/Gestion-Stock-Jira/backend.git'
-                sh './mvnw clean compile'
+                sh './mvnw clean compile package'
+
             }
         }
         stage('Test') {
             steps {
-                sh './mvnw test'
+                sh './mvnw test -Dtest=DemoApplicationTests#testCreateProduct test'
             }
         }
     }

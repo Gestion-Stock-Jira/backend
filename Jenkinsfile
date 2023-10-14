@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 git 'https://github.com/Gestion-Stock-Jira/backend.git'
-                sh './mvnw clean compile package'
+                sh './mvnw clean compile'
 
             }
         }

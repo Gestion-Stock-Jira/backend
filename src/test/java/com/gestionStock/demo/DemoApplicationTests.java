@@ -20,6 +20,24 @@ class DemoApplicationTests {
 	}
 	@Autowired
 	private MockMvc mockMvc;
+
+	Product productToCreate = new Product();
+	{
+		productToCreate.setId(4L);
+		productToCreate.setName("Test Name Jenkins");
+		productToCreate.setDescription("Test Description Jenkins");
+		productToCreate.setPrice(200);
+		productToCreate.setQuantity(5);
+	}
+	public static String asJsonString(final Object obj) {
+		try {
+			final ObjectMapper mapper = new ObjectMapper();
+			final String jsonContent = mapper.writeValueAsString(obj);
+			return jsonContent;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 	@Test
 	public void testGetAllProducts() throws Exception {
 	String response = mockMvc.perform(MockMvcRequestBuilders.get("/api/products")
@@ -30,6 +48,14 @@ class DemoApplicationTests {
 	System.out.println(response);
 		System.out.println("Test test");
 
+	}
+	@Test
+	public void testCreateProduct() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/products")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(asJsonString(productToCreate)))
+				.andExpect(MockMvcResultMatchers.status().isCreated());
 	}
 
 

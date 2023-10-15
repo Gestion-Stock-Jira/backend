@@ -18,6 +18,17 @@ class DemoApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+	@Test
+	public void testGetAllProducts() {
+//	String response = mockMvc.perform(MockMvcRequestBuilders.get("/api/products")
+//					.contentType(MediaType.APPLICATION_JSON))
+//			.andExpect(MockMvcResultMatchers.status().isOk()).andReturn()
+//			.getResponse()
+//			.getContentAsString();
+//	System.out.println(response);
+		System.out.println("Test test");
+
+	}
 
 
 }

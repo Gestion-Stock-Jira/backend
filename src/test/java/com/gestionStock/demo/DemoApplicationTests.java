@@ -65,6 +65,14 @@ class DemoApplicationTests {
 
 		System.out.println(response);
 	}
+	@Test
+	public void testUpdateProduct() throws Exception {
+		productToCreate.setQuantity(100);
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/products/{id}", productToCreate.getId())
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(asJsonString(productToCreate)))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
 
 
 }

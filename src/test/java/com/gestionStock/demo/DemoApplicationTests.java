@@ -18,14 +18,16 @@ class DemoApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+	@Autowired
+	private MockMvc mockMvc;
 	@Test
-	public void testGetAllProducts() {
-//	String response = mockMvc.perform(MockMvcRequestBuilders.get("/api/products")
-//					.contentType(MediaType.APPLICATION_JSON))
-//			.andExpect(MockMvcResultMatchers.status().isOk()).andReturn()
-//			.getResponse()
-//			.getContentAsString();
-//	System.out.println(response);
+	public void testGetAllProducts() throws Exception {
+	String response = mockMvc.perform(MockMvcRequestBuilders.get("/api/products")
+					.contentType(MediaType.APPLICATION_JSON))
+			.andExpect(MockMvcResultMatchers.status().isOk()).andReturn()
+			.getResponse()
+			.getContentAsString();
+	System.out.println(response);
 		System.out.println("Test test");
 
 	}

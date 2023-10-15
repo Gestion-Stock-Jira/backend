@@ -23,7 +23,7 @@ class DemoApplicationTests {
 
 	Product productToCreate = new Product();
 	{
-		productToCreate.setId(4L);
+		productToCreate.setId(1L);
 		productToCreate.setName("Test Name Jenkins");
 		productToCreate.setDescription("Test Description Jenkins");
 		productToCreate.setPrice(200);
@@ -56,6 +56,14 @@ class DemoApplicationTests {
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(asJsonString(productToCreate)))
 				.andExpect(MockMvcResultMatchers.status().isCreated());
+	}
+	@Test
+	public void testGetProductById() throws Exception {
+		String response = mockMvc.perform(MockMvcRequestBuilders.get("/api/products/{id}", productToCreate.getId())
+						.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
+
+		System.out.println(response);
 	}
 
 

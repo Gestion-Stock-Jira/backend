@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment{
+    DOCKERHUB_CREDENTIALS = credentials('nizarbouhsaine-dockerhub')
+    }
     tools{
         maven 'Maven'
     }
@@ -16,6 +19,18 @@ pipeline {
                 sh './mvnw test'
             }
         }
+        stage('Build Docker Image')
+        {
+        steps{
+        sh 'docker build -t nizarbouhsaine/devops-gestion:latest'
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        sh 'docker push nizarbouhsaine/devops-gestion:latest'
+        }
+        }
 
     }
+    post{
+    always{
+    sh 'docker logout'
+    }}
 }

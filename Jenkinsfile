@@ -23,7 +23,7 @@ pipeline {
         {
         steps{
         sh 'mvn compile jib:dockerBuild'
-        sh 'docker build -t nizarbouhsaine/devops-gestion:latest'
+        sh 'docker build -t nizarbouhsaine/devops-gestion:latest .'
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
         sh 'docker push nizarbouhsaine/devops-gestion:latest'
         }

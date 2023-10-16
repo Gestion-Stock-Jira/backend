@@ -45,7 +45,7 @@ class DemoApplicationTests {
 			.andExpect(MockMvcResultMatchers.status().isOk()).andReturn()
 			.getResponse()
 			.getContentAsString();
-	System.out.println(response);
+		System.out.println(response);
 		System.out.println("Test test");
 
 	}

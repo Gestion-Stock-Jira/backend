@@ -1,18 +1,21 @@
 pipeline {
     agent any
-
+    tools{
+        maven 'Maven'
+    }
     stages {
-        stage('Build') {
+        stage('Build Maven') {
             steps {
-                git 'https://github.com/Gestion-Stock-Jira/backend.git'
-                sh './mvnw clean compile'
+               checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Gestion-Stock-Jira/backend.git']])
+               sh './mvnw clean install'
+            }
+        }
+        stage('Test')
+        {
+            steps{
+                sh './mvnw test'
+            }
+        }
 
-            }
-        }
-        stage('Test') {
-            steps {
-                sh './mvnw test -Dtest=DemoApplicationTests#testGetAllProducts test'
-            }
-        }
     }
 }
